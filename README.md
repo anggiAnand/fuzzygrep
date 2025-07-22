@@ -14,7 +14,7 @@
 ## Installation
 
 ```bash
-git clone https://github.com/yourname/fuzzygrep.git
+git clone https://github.com/anggiAnand/fuzzygrep.git
 cd fuzzygrep
 pip install -r requirements.txt
 ```
@@ -49,4 +49,4 @@ Feel free to fork the repository and pull requests
 
 ---
 
-Created with love by Anggi Ananda\
+Created with love by Anggi Ananda
