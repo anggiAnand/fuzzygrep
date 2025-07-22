@@ -68,7 +68,6 @@ class FuzzyJSONSearcher:
             if self.data:
                 self._all_keys = self._extract_json_keys(self.data)
                 self._all_values = self._extract_json_values(self.data)
-                self.is_json = True
         elif ext == '.csv':
             self.data = self._load_csv()
             if self.data:
@@ -232,22 +231,19 @@ class FuzzyJSONSearcher:
         nested_matches = []
 
         for m, score in matches:
-            if self.is_json:
-                if search_type == "keys":
-                    values = self._get_values_by_path(self.data, m)
-                    if values:
-                        is_nested = any(isinstance(v, (dict, list)) for v in values)
-                        if is_nested:
-                            nested_matches.append((m, score, values))
-                        else:
-                            for value in values:
-                                table.add_row(m, str(value), str(score))
-                else: # search_type == "values"
-                    keys = self.value_to_keys_map.get(m, [])
-                    if keys:
-                        table.add_row(m, ", ".join(keys), str(score))
-            else:
-                table.add_row(m, "N/A", str(score))
+            if search_type == "keys":
+                values = self._get_values_by_path(self.data, m)
+                if values:
+                    is_nested = any(isinstance(v, (dict, list)) for v in values)
+                    if is_nested:
+                        nested_matches.append((m, score, values))
+                    else:
+                        for value in values:
+                            table.add_row(m, str(value), str(score))
+            else: # search_type == "values"
+                keys = self.value_to_keys_map.get(m, [])
+                if keys:
+                    table.add_row(m, ", ".join(keys), str(score))
 
         if table.rows:
             if len(matches) > 20: # Threshold for pagination
