@@ -1,0 +1,5 @@
+prompt_toolkit==3.0.51
+rapidfuzz==3.13.0
+rich==14.0.0
+termgraph==0.5.3
+typer==0.16.0
